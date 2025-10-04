@@ -4,6 +4,7 @@
 #include <iostream>
 
 static Logger* instance;
+std::string fullLog = "";
 
 Logger::Logger() {}
 
@@ -20,18 +21,22 @@ void Logger::GameStartUp() {}
 
 void Logger::RenderGame() {
 
-    ImGui::ShowDemoWindow();
+    //ImGui::ShowDemoWindow();
     //ImGui::ShowDebugLogWindow();
 
     ImGui::Begin("Game Log");
+
+    ImGui::Text(fullLog.c_str());
+
+    ImGui::LogFinish();
 
     ImGui::End();
 }
 
 void Logger::LogInfo(const std::string info) {
-    ImGui::LogText(info.c_str());
+    fullLog += "[info] " + info + '\n';
 }
 
 void Logger::LogGameEvent(const std::string gameEvent) {
-    ImGui::LogText(gameEvent.c_str());
+    fullLog += "[game event] " + gameEvent + '\n';
 }
