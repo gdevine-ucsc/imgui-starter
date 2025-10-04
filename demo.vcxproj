@@ -406,6 +406,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\Aegis\Documents\school\fall 25\CMPM 123\Logging System\imgui-starter\imgui\imgui_tables.cpp" />
     <ClCompile Include="C:\Users\Aegis\Documents\school\fall 25\CMPM 123\Logging System\imgui-starter\imgui\imgui_widgets.cpp" />
     <ClCompile Include="C:\Users\Aegis\Documents\school\fall 25\CMPM 123\Logging System\imgui-starter\imgui\imgui.cpp" />
+    <ClCompile Include="C:\Users\Aegis\Documents\school\fall 25\CMPM 123\Logging System\imgui-starter\Logger.cpp" />
     <ClCompile Include="C:\Users\Aegis\Documents\school\fall 25\CMPM 123\Logging System\imgui-starter\imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="C:\Users\Aegis\Documents\school\fall 25\CMPM 123\Logging System\imgui-starter\main_win32.cpp" />
     <ClCompile Include="C:\Users\Aegis\Documents\school\fall 25\CMPM 123\Logging System\imgui-starter\imgui\imgui_impl_win32.cpp" />

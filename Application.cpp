@@ -3,7 +3,7 @@
 
 #include "Logger.h"
 
-using namespace LoggerSpace;
+//using namespace LoggerSpace;
 
 namespace ClassGame {
         //
@@ -41,6 +41,8 @@ namespace ClassGame {
                 ImGui::LogFinish();
             }
             ImGui::End();
+
+            Logger::GetInstance().RenderGame();
         }
 
         //
