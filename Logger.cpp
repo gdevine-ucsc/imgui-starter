@@ -21,13 +21,14 @@ void Logger::GameStartUp() {}
 
 void Logger::RenderGame() {
 
-    //ImGui::ShowDemoWindow();
-    //ImGui::ShowDebugLogWindow();
-
     ImGui::Begin("Game Log");
 
-    ImGui::Text(fullLog.c_str());
+    if (ImGui::Button("Clear"))
+    {
+        ClearLog();
+    }
 
+    ImGui::Text(fullLog.c_str());
     ImGui::LogFinish();
 
     ImGui::End();
@@ -39,4 +40,8 @@ void Logger::LogInfo(const std::string info) {
 
 void Logger::LogGameEvent(const std::string gameEvent) {
     fullLog += "[game event] " + gameEvent + '\n';
+}
+
+void Logger::ClearLog() {
+    fullLog = "";
 }

@@ -23,5 +23,6 @@ class Logger {
         
         void LogInfo(const std::string info);
         void LogGameEvent(const std::string gameEvent);
+        void ClearLog();
 
 };
