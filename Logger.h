@@ -20,6 +20,7 @@ class Logger {
 
         void GameStartUp();
         void RenderGame();
+        void RenderText();
         
         void LogInfo(const std::string info);
         void LogGameEvent(const std::string gameEvent);
