@@ -16,7 +16,7 @@ class Logger {
         void RenderButtons();
 
         void CreateAndPushEntry(ImVec4 color, std::string entryText);
-        
+        void LogToFile(const std::string text);
 
     public:
 

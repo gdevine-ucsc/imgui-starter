@@ -1,4 +1,4 @@
-# imgui-starter
+# imgui-starter - Aegis Michael
 
 Using the provided code provided here you have a base Dear IMGUI project for Windows and macOS. There is a basic CMakefile in this project that includes the necessary files to create an application that brings up just a basic screen.
 

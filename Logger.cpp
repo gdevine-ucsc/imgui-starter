@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <list>
+#include <fstream>
 
 static Logger* instance;
 //std::string fullLog = "";
@@ -98,13 +99,23 @@ void Logger::LogError(const std::string error) {
 }
 
 void Logger::CreateAndPushEntry(ImVec4 color, std::string entryText) {
+
     Entry entry;
     entry.num = entryNum;
+    entryNum++;
     entry.color = color;
     entry.text = entryText;
     fullLog.push_front(entry);
 
-    entryNum++;
+    LogToFile(entry.text);
+
+}
+
+void Logger::LogToFile(const std::string text) {
+    
+    std::ofstream outfile("Output\LoggerOutput.txt");
+    outfile << "test\n";
+    outfile.close();
 }
 
 void Logger::ClearLog() {
