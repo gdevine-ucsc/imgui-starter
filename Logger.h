@@ -1,5 +1,7 @@
 #pragma once
 
+#include "imgui/imgui.h"
+
 #include <string>
 
 // this class uses a singleton structure! i learned about them here:
@@ -10,20 +12,24 @@ class Logger {
     private:
         Logger();
 
-        //static Logger* instance;
+        void RenderText();
+        void RenderButtons();
+
+        void CreateAndPushEntry(ImVec4 color, std::string entryText);
+        
 
     public:
-        //Logger(Logger &other) = delete; // prevent using constructor in other classes
-        //void operator=(const Logger &) = delete; // prevent assigning of instance to something else
 
         static Logger& GetInstance();
 
         void GameStartUp();
         void RenderGame();
-        void RenderText();
         
         void LogInfo(const std::string info);
         void LogGameEvent(const std::string gameEvent);
+        void LogWarning(const std::string warning);
+        void LogError(const std::string error);
+
         void ClearLog();
 
 };

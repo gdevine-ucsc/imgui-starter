@@ -1,5 +1,4 @@
 #include "Logger.h"
-#include "imgui/imgui.h"
 
 #include <iostream>
 #include <list>
@@ -7,7 +6,8 @@
 static Logger* instance;
 //std::string fullLog = "";
 
-struct Entry { std::string text; ImU32 color; };
+struct Entry { int num; ImVec4 color; std::string text; };
+int entryNum = 1;
 
 std::list<Entry> fullLog;
 
@@ -28,14 +28,7 @@ void Logger::RenderGame() {
 
     ImGui::Begin("Game Log");
 
-    if (ImGui::Button("Clear"))
-    {
-        ClearLog();
-    }
-
-    //ImGui::Text(fullLog.c_str());
-    //ImGui::LogFinish();
-
+    RenderButtons();
     RenderText();
 
     ImGui::End();
@@ -43,36 +36,79 @@ void Logger::RenderGame() {
 
 void Logger::RenderText() {
 
+    ImGui::TextUnformatted("\n");
+
     for (Entry entry : fullLog) {
         
-        ImGui::PushStyleColor(ImGuiCol_Text, entry.color);
-
-        std::string displayText = "";
-        displayText += entry.text;
-        ImGui::TextUnformatted(displayText.c_str());
-
-        ImGui::PopStyleColor();
+        ImGui::TextColored(entry.color, (std::to_string(entry.num) + " " + entry.text).c_str());
     }
 
     ImGui::LogFinish();
 
 }
 
+void Logger::RenderButtons() {
+
+    ImGui::BeginGroup();
+
+    if (ImGui::Button("Clear"))
+        ClearLog();
+
+    ImGui::SameLine();
+    
+    if (ImGui::Button("Test Info")) 
+        LogInfo("test");
+
+    ImGui::SameLine();
+
+    if (ImGui::Button("Test Game Event")) 
+        LogGameEvent("test");
+
+    ImGui::SameLine();
+    
+    if (ImGui::Button("Test Warning")) 
+        LogWarning("test");
+
+    ImGui::SameLine();
+
+    if (ImGui::Button("Test Error")) 
+        LogError("test");
+    
+
+    ImGui::EndGroup();
+}
+
 void Logger::LogInfo(const std::string info) {
-    //fullLog += "[info] " + info + '\n';
-    std::string entryText = "[info] " + info + '\n';
-    Entry entry = {entryText, 99999};
-    fullLog.push_back(entry);
+
+    CreateAndPushEntry(ImVec4(1, 1, 1, 1), "[info] " + info + '\n');
 }
 
 void Logger::LogGameEvent(const std::string gameEvent) {
 
-    //fullLog += "[game event] " + gameEvent + '\n';
-    std::string entryText = "[game event] " + gameEvent + '\n';
-    Entry entry = {entryText, 99950};
-    fullLog.push_back(entry);
+    CreateAndPushEntry( ImVec4(0.5f, 1, 0.5f, 1), "[game event] " + gameEvent + '\n');
+}
+
+void Logger::LogWarning(const std::string warning) {
+
+    CreateAndPushEntry( ImVec4(1, 1, 0.5f, 1), "[warning] " + warning + '\n');
+}
+
+void Logger::LogError(const std::string error) {
+    CreateAndPushEntry(ImVec4(1, 0.2f, 0.2f, 1), "[error] " + error + '\n');
+}
+
+void Logger::CreateAndPushEntry(ImVec4 color, std::string entryText) {
+    Entry entry;
+    entry.num = entryNum;
+    entry.color = color;
+    entry.text = entryText;
+    fullLog.push_front(entry);
+
+    entryNum++;
 }
 
 void Logger::ClearLog() {
-    //fullLog = "";
+
+    fullLog.clear();
+    entryNum = 1;
 }
