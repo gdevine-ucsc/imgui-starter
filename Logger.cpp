@@ -5,22 +5,28 @@
 #include <fstream>
 
 static Logger* instance;
-//std::string fullLog = "";
+std::ofstream logFile;
 
 struct Entry { int num; ImVec4 color; std::string text; };
 int entryNum = 1;
 
 std::list<Entry> fullLog;
 
-Logger::Logger() {}
+Logger::Logger() {
+    logFile.open("LoggerOutput.txt");
+    logFile << "test" << std::endl;
+}
 
 Logger& Logger::GetInstance() {
 
     if (!instance) {
         instance = new Logger();
     }
-
     return *instance;
+}
+
+Logger::~Logger() {
+    logFile.close();
 }
 
 void Logger::GameStartUp() {}
@@ -107,15 +113,7 @@ void Logger::CreateAndPushEntry(ImVec4 color, std::string entryText) {
     entry.text = entryText;
     fullLog.push_front(entry);
 
-    LogToFile(entry.text);
-
-}
-
-void Logger::LogToFile(const std::string text) {
-    
-    std::ofstream outfile("Output\LoggerOutput.txt");
-    outfile << "test\n";
-    outfile.close();
+    logFile << entry.text;
 }
 
 void Logger::ClearLog() {

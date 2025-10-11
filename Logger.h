@@ -11,12 +11,12 @@ class Logger {
 
     private:
         Logger();
+        ~Logger();
 
         void RenderText();
         void RenderButtons();
 
         void CreateAndPushEntry(ImVec4 color, std::string entryText);
-        void LogToFile(const std::string text);
 
     public:
 
